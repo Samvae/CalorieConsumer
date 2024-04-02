@@ -1,29 +1,3 @@
-// Create a button element
-const button = document.createElement("button");
-button.innerText = "Return";
-button.classList.add("custom-button");
-
-// Add an event listener to the button for redirection
-button.addEventListener("click", function() {
-    window.location.href = "/index.html";
-});
-document.body.appendChild(button);
-
-////////////////////////////////////////////////////////////////
-// Create a button element
-const Foodbutton = document.createElement("button");
-Foodbutton.innerText = "Food";
-Foodbutton.classList.add("food-button");
-document.body.appendChild(Foodbutton);
-
-// Add a div to display the ball count
-const ballCountDisplay = document.createElement("div");
-ballCountDisplay.id = "ballCountDisplay";
-ballCountDisplay.textContent = "Balls in Box: 0";
-ballCountDisplay.classList.add("ball-count-display");
-document.body.appendChild(ballCountDisplay);
-
-////////////////////////////////////////////////////////////////
 // module aliases
 var Engine = Matter.Engine,
 Render = Matter.Render,
@@ -42,12 +16,10 @@ var render = Render.create({
     options: {
         width: window.innerWidth,
         height: window.innerHeight,
-        wireframes: false
+        wireframes: false,
+        background: "#EEF4EE"
     }
 });
-
-render.canvas.width = window.innerWidth;
-render.canvas.height = window.innerHeight;
 
 // add mouse control
 let mouse = Matter.Mouse.create(render.canvas);
@@ -61,84 +33,126 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
 var boxWidth = 200;
 var boxHeight = 100;
 
-var sensorBottom = Bodies.rectangle(
-    700, 200 + boxHeight / 2 + 5, boxWidth, 10,
+var sensors = [
+    // Sensor at the bottom
     {
+      body: Bodies.rectangle(700, 200 + boxHeight / 2 + 5, boxWidth, 10, {
         isStatic: true
-    }
-);
-
-var sensorLeft = Bodies.rectangle(
-    700 - boxWidth / 2 - 5, 200, 10, boxHeight,
+      }),
+      name: "sensorBottom"
+    },
+    // Sensor on the left
     {
+      body: Bodies.rectangle(700 - boxWidth / 2 - 5, 200, 10, boxHeight, {
         isStatic: true
-    }
-);
-
-var sensorRight = Bodies.rectangle(
-    700 + boxWidth / 2 + 5, 200, 10, boxHeight,
+      }),
+      name: "sensorLeft"
+    },
+    // Sensor on the right
     {
+      body: Bodies.rectangle(700 + boxWidth / 2 + 5, 200, 10, boxHeight, {
         isStatic: true
+      }),
+      name: "sensorRight"
     }
-);
+  ];
+  
 
-Foodbutton.addEventListener("click", function() {
-    var box = Bodies.circle(700, 200, 15);
-    Composite.add(engine.world, [box]);
+const bananaButton = document.getElementById("bananaButton");
+bananaButton.addEventListener("click", function() {
+    var banana = Bodies.circle(700,200,15   , {
+        render: {
+            sprite: {
+                texture: "/banana1.png"
+            }
+        }
+    });
+    Composite.add(engine.world, [banana]);
 });
 
-// Update the ball count display
-function updateBallCountDisplay() {
-    const ballCount = countBallsInBox();
-    ballCountDisplay.textContent = `Balls: ${ballCount}`;
+// Update the calories count display
+const calories = document.getElementById("calories");
+function updateCalories() {
+    const kcal = countCalories();
+    calories.textContent = `Calories: ${kcal}`;
 }
 
-// Count the number of balls inside the box
-function countBallsInBox() {
+// Count the number of caloriess inside the box
+function countCalories() {
     const allBodies = Composite.allBodies(engine.world);
 
-    let ballCount = 0;
+    let calories = 0;
     allBodies.forEach(body => {
-        if (body.label === "Circle Body" && checkBallInBox(body)) {
-            ballCount++;
+        if (body.label === "Circle Body" && checkCalories(body)) {
+            calories++;
         }
     });
 
-    return ballCount;
+    return calories;
 }
 
-// Function to check if a ball is inside the box
-function checkBallInBox(ball) {
+// Function to check if a calories is inside the box
+function checkCalories(calories) {
     const boxWidth = 200;
     const boxHeight = 100;
     const boxX = 700;
     const boxY = 200;
 
-    const ballX = ball.position.x;
-    const ballY = ball.position.y;
+    const caloriesX = calories.position.x;
+    const caloriesY = calories.position.y;
 
     const boxTop = boxY - boxHeight / 2;
     const boxBottom = boxY + boxHeight / 2;
     const boxLeft = boxX - boxWidth / 2;
     const boxRight = boxX + boxWidth / 2;
 
-    if (ballX > boxLeft && ballX < boxRight && ballY > boxTop && ballY < boxBottom) {
+    if (caloriesX > boxLeft && caloriesX < boxRight && caloriesY > boxTop && caloriesY < boxBottom) {
         return true;
     } else {
         return false;
     }
 }
 
-// World
-var ground = Bodies.rectangle(window.innerWidth/2, window.innerHeight,window.innerWidth,100,{ isStatic: true });
-var Lwall = Bodies.rectangle(0, window.innerHeight,10,window.innerHeight*2,{ isStatic: true });
-var Rwall = Bodies.rectangle(window.innerWidth, window.innerHeight,10,window.innerHeight*2,{ isStatic: true });
-var topWall = Bodies.rectangle(window.innerWidth/2, 0,window.innerWidth,10,{ isStatic: true });
+var walls = [
+    // Ground
+    {
+      body: Bodies.rectangle(window.innerWidth / 2, window.innerHeight, window.innerWidth, 100, {
+        isStatic: true,
+        render: {
+          fillStyle: "#007B16"
+        }
+      }),
+      name: "ground"
+    },
+    // Left Wall
+    {
+      body: Bodies.rectangle(0, window.innerHeight, 5, window.innerHeight * 2, {
+        isStatic: true
+      }),
+      name: "Lwall"
+    },
+    // Right Wall
+    {
+      body: Bodies.rectangle(window.innerWidth, window.innerHeight, 5, window.innerHeight * 2, {
+        isStatic: true
+      }),
+      name: "Rwall"
+    },
+  ];
+  
+// Combine all bodies into a single array
+var bodiesToAdd = walls.map(wall => wall.body)
+                    .concat(sensors.map(sensor => sensor.body))
+                    .concat(mouseConstraint);
 
-Composite.add(engine.world, [sensorBottom, sensorLeft, sensorRight, ground, Lwall, Rwall, topWall, mouseConstraint]);
+// Add all bodies to the world
+Composite.add(engine.world, bodiesToAdd);
+
 Render.run(render);
 var runner = Runner.create();
 Runner.run(runner, engine);
 
-// Update the ball count display continuously
-Events.on(engine, 'beforeUpdate', updateBallCountDisplay);
+
+
+// Update the calories count display continuously
+Events.on(engine, 'beforeUpdate', updateCalories);

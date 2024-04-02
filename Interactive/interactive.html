@@ -7,7 +7,26 @@
   <link rel="stylesheet" href="/Interactive/style.css">
 </head>
 <body>
+      <a href="/index.html" class="return-button">Return</a>
+        <!-- Refresh button -->
+      <button class="clear-button" onclick="refreshPage()">Clear</button>
+
+        <!-- Using object tag to display SVG -->
+      <!-- <img src="/mouth.svg" alt="Mouth SVG" class="mouth-svg"> -->
+
+      <button id="bananaButton" class="banana-button">Banana</button>
+
+      <div id="calories"class="calories-display">Calories: 0</div>
+
       <script src="/node_modules/matter-js/build/matter.js"></script>
+      <script src="/node_modules/matter-js/build/matter.min.js"></script>
+      <script src="/node_modules/matter-js/build/matter.dev.js"></script>
       <script src="script.js"></script>
+      <script>
+        function refreshPage() {
+          // Reload the current page
+          location.reload();
+        }
+      </script>
 </body>
 </html>
