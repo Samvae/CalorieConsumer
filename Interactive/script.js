@@ -1,10 +1,10 @@
 // module aliases
 var Engine = Matter.Engine,
-Render = Matter.Render,
-Runner = Matter.Runner,
-Bodies = Matter.Bodies,
-Composite = Matter.Composite,
-Events = Matter.Events;
+    Render = Matter.Render,
+    Runner = Matter.Runner,
+    Bodies = Matter.Bodies,
+    Composite = Matter.Composite,
+    Events = Matter.Events;
 
 // create an engine
 var engine = Engine.create();
@@ -30,45 +30,53 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
     }
 });
 
-var boxWidth = 200;
-var boxHeight = 100;
+const stomachBottom = {
+    body: Bodies.rectangle(window.innerWidth/2, window.innerHeight - 100, 400, 10, {
+        isStatic: true,
+    }),
+    name: "stomachBottom"
+};
 
-var sensors = [
-    // Sensor at the bottom
-    {
-      body: Bodies.rectangle(700, 200 + boxHeight / 2 + 5, boxWidth, 10, {
+const stomachLeft = {
+    body: Bodies.rectangle(window.innerWidth/2 - 200, window.innerHeight - 145, 10, 100, {
         isStatic: true
-      }),
-      name: "sensorBottom"
-    },
-    // Sensor on the left
-    {
-      body: Bodies.rectangle(700 - boxWidth / 2 - 5, 200, 10, boxHeight, {
-        isStatic: true
-      }),
-      name: "sensorLeft"
-    },
-    // Sensor on the right
-    {
-      body: Bodies.rectangle(700 + boxWidth / 2 + 5, 200, 10, boxHeight, {
-        isStatic: true
-      }),
-      name: "sensorRight"
-    }
-  ];
-  
+    }),
+    name: "stomachLeft"
+};
 
-const bananaButton = document.getElementById("bananaButton");
-bananaButton.addEventListener("click", function() {
-    var banana = Bodies.circle(700,200,15   , {
+const stomachRight = {
+    body: Bodies.rectangle(window.innerWidth/2 + 200, window.innerHeight - 145, 10, 100, {
+        isStatic: true
+    }),
+    name: "stomachRight"
+};
+
+const banana = document.getElementById("banana");
+banana.addEventListener("click", function() {
+    var bananaBody = Bodies.circle(700, 200, 15, {
         render: {
             sprite: {
-                texture: "/banana1.png"
+                // texture: "/banana1.png"
             }
-        }
+        },
+        value: 105  // Calories of banana
     });
-    Composite.add(engine.world, [banana]);
+    Composite.add(engine.world, [bananaBody]);
 });
+
+const strawberry = document.getElementById("strawberry");
+strawberry.addEventListener("click", function() {
+    var strawberryBody = Bodies.circle(700, 200, 10, {
+        render: {
+            sprite: {
+                // texture: ""
+            }
+        },
+        value: 7  // Calories of banana
+    });
+    Composite.add(engine.world, [strawberryBody]);
+});
+
 
 // Update the calories count display
 const calories = document.getElementById("calories");
@@ -77,36 +85,27 @@ function updateCalories() {
     calories.textContent = `Calories: ${kcal}`;
 }
 
-// Count the number of caloriess inside the box
+// Count the number of calories inside the box
 function countCalories() {
     const allBodies = Composite.allBodies(engine.world);
 
-    let calories = 0;
+    let totalCalories = 0;
     allBodies.forEach(body => {
         if (body.label === "Circle Body" && checkCalories(body)) {
-            calories++;
+            totalCalories += body.value || 0; // Add the 'value' property to total
         }
     });
 
-    return calories;
+    return totalCalories;
 }
 
-// Function to check if a calories is inside the box
-function checkCalories(calories) {
-    const boxWidth = 200;
-    const boxHeight = 100;
-    const boxX = 700;
-    const boxY = 200;
-
-    const caloriesX = calories.position.x;
-    const caloriesY = calories.position.y;
-
-    const boxTop = boxY - boxHeight / 2;
-    const boxBottom = boxY + boxHeight / 2;
-    const boxLeft = boxX - boxWidth / 2;
-    const boxRight = boxX + boxWidth / 2;
-
-    if (caloriesX > boxLeft && caloriesX < boxRight && caloriesY > boxTop && caloriesY < boxBottom) {
+// Function to check if food is inside the box
+function checkCalories(food) {
+    if (food.position.x > stomachLeft.body.bounds.min.x && 
+        food.position.x < stomachRight.body.bounds.min.x &&
+        food.position.y > stomachLeft.body.bounds.min.y &&
+        food.position.y < stomachBottom.body.bounds.max.y
+        ) {
         return true;
     } else {
         return false;
@@ -116,34 +115,36 @@ function checkCalories(calories) {
 var walls = [
     // Ground
     {
-      body: Bodies.rectangle(window.innerWidth / 2, window.innerHeight, window.innerWidth, 100, {
-        isStatic: true,
-        render: {
-          fillStyle: "#007B16"
-        }
-      }),
-      name: "ground"
+        body: Bodies.rectangle(window.innerWidth / 2, window.innerHeight, window.innerWidth, 100, {
+            isStatic: true,
+            render: {
+                fillStyle: "#007B16"
+            }
+        }),
+        name: "ground"
     },
     // Left Wall
     {
-      body: Bodies.rectangle(0, window.innerHeight, 5, window.innerHeight * 2, {
-        isStatic: true
-      }),
-      name: "Lwall"
+        body: Bodies.rectangle(0, window.innerHeight, 5, window.innerHeight * 2, {
+            isStatic: true
+        }),
+        name: "Lwall"
     },
     // Right Wall
     {
-      body: Bodies.rectangle(window.innerWidth, window.innerHeight, 5, window.innerHeight * 2, {
-        isStatic: true
-      }),
-      name: "Rwall"
+        body: Bodies.rectangle(window.innerWidth, window.innerHeight, 5, window.innerHeight * 2, {
+            isStatic: true
+        }),
+        name: "Rwall"
     },
-  ];
-  
+];
+
 // Combine all bodies into a single array
 var bodiesToAdd = walls.map(wall => wall.body)
-                    .concat(sensors.map(sensor => sensor.body))
-                    .concat(mouseConstraint);
+    .concat(stomachBottom.body)   
+    .concat(stomachLeft.body)
+    .concat(stomachRight.body)
+    .concat(mouseConstraint);
 
 // Add all bodies to the world
 Composite.add(engine.world, bodiesToAdd);
@@ -151,8 +152,6 @@ Composite.add(engine.world, bodiesToAdd);
 Render.run(render);
 var runner = Runner.create();
 Runner.run(runner, engine);
-
-
 
 // Update the calories count display continuously
 Events.on(engine, 'beforeUpdate', updateCalories);
