@@ -5,30 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive</title>
   <link rel="stylesheet" href="/Interactive/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>
 <body>
-      <a href="/index.html" class="return-button">Return</a>
-        <!-- Refresh button -->
-      <button class="clear-button" onclick="refreshPage()">Clear</button>
+  <input type="checkbox" id="check">
+    <label for="check">
+      <i class="fas fa-arrow-right" id="btn"></i>
+      <i class="fas fa-arrow-left" id="cancel"></i>
+    </label>
+    <button class="fas fa-times" id="exit" onclick="returnHome()"></button>
+    <button class="fas fa-redo-alt" id="reload" onclick="refreshPage()"></button>
+    <div class="sidebar">
+    <header>Food Bar</header>
+    <button id="calories">Calories: 0</button>
+    <button id="banana">Banana</button>
+    <button id="strawberry">Strawberry</button>
+    <button id="carrot">Carrot</button>
+    <button id="egg">Egg</button>
+    <button id="salmon">Salmon</button>
+    <button id="apple">Apple</button>
+    <button id="walnut">Walnut</button>
+    <button id="bacon">Bacon</button>
+    <button id="hamburger">Hamburger</button>
+    <button id="pizza">Pizza</button>
+    <button id="chickenwing">Chicken Wing</button>
+    <button id="chickenbreast">Chicken Breast</button>
+    <button id="chickenthigh">Chicken Thigh</button>
+    <button id="chickendrumstick">Chicken Drumstick</button>
+      </a>
+    </div>
 
-        <!-- Using object tag to display SVG -->
-      <!-- <img src="/mouth.svg" alt="Mouth SVG" class="mouth-svg"> -->
 
-      <button id="banana" class="banana">Banana</button>
-      <button id="strawberry" class="strawberry">Strawberry</button>
-
-
-      <div id="calories"class="calories-display">Calories: 0</div>
-
-      <script src="/node_modules/matter-js/build/matter.js"></script>
-      <script src="/node_modules/matter-js/build/matter.min.js"></script>
-      <script src="/node_modules/matter-js/build/matter.dev.js"></script>
-      <script src="script.js"></script>
-      <script>
-        function refreshPage() {
-          // Reload the current page
-          location.reload();
-        }
-      </script>
+  <script src="/node_modules/matter-js/build/matter.js"></script>
+  <script src="/node_modules/matter-js/build/matter.min.js"></script>
+  <script src="/node_modules/matter-js/build/matter.dev.js"></script>
+  <script src="script.js"></script>
+  <script>
+    function refreshPage() {
+      // Reload the current page
+      location.reload();
+    }
+    function returnHome() {
+      // Redirect to the Banana page
+      window.location.href = "/index.html";
+    }
+  </script>
 </body>
 </html>

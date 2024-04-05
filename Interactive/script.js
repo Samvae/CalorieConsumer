@@ -30,11 +30,50 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
     }
 });
 
+//PLATE
+const plateBottom = {
+    body: Matter.Bodies.rectangle(window.innerWidth/4, window.innerHeight/2, 450, 10, {
+      isStatic: true,
+      render: {
+        sprite: {
+          texture: '/images/plate.png', // Image for the plate
+          xScale: 0.5, // Adjust scale if needed
+          yScale: 0.5
+        }
+      }
+    }),
+    name: "plateBottom",
+  };
+
+  const plateLeft = {
+    body: Bodies.rectangle(window.innerWidth/4 - 230, window.innerHeight/2 - 10, 10, 20, {
+        isStatic: true,
+        render: {
+            opacity: 0, // Make the rectangle invisible
+          }
+    }),
+    name: "plateLeft"
+};
+
+const plateRight = {
+    body: Bodies.rectangle(window.innerWidth/4 + 230, window.innerHeight/2 - 10, 10, 20, {
+        isStatic: true,
+        render: {
+            opacity: 0, // Make the rectangle invisible
+          }
+    }),
+    name: "plateRight"
+};
+
+
+
+
+//STOMACH
 const stomachBottom = {
     body: Bodies.rectangle(window.innerWidth/2, window.innerHeight - 100, 400, 10, {
         isStatic: true,
     }),
-    name: "stomachBottom"
+    name: "stomachBottom",
 };
 
 const stomachLeft = {
@@ -51,32 +90,115 @@ const stomachRight = {
     name: "stomachRight"
 };
 
-const banana = document.getElementById("banana");
-banana.addEventListener("click", function() {
-    var bananaBody = Bodies.circle(700, 200, 15, {
-        render: {
-            sprite: {
-                // texture: "/banana1.png"
-            }
-        },
-        value: 105  // Calories of banana
-    });
-    Composite.add(engine.world, [bananaBody]);
-});
+const Foods = [
+    { 
+        id: "banana",
+        texture: "/images/banana.png",
+        calories: 105,
+        size: 15
+    },
+    { 
+        id: "strawberry",
+        texture: "",
+        calories: 6,
+        size: 10,
+    },
+    { 
+        id: "carrot",
+        texture: "",
+        calories: 25,
+        size: 10
+    },
+    { 
+        id: "egg",
+        texture: "",
+        calories: 90,
+        size: 10
+    },
+    { 
+        id: "salmon",
+        texture: "",
+        calories: 175,
+        size: 15
+    },
+    { 
+        id: "apple",
+        texture: "",
+        calories: 80,
+        size: 10
+    },
+    { 
+        id: "walnut",
+        texture: "",
+        calories: 26,
+        size: 10
+    },
+    { 
+        id: "bacon",
+        texture: "",
+        calories: 43,
+        size: 12
+    },
+    { 
+        id: "hamburger",
+        texture: "",
+        calories: 254,
+        size: 12
+    },
+    { 
+        id: "pizza",
+        texture: "",
+        calories: 285,
+        size: 15
+    },
+    { 
+        id: "chickenbreast",
+        texture: "",
+        calories: 165,
+        size: 15
+    },
+    { 
+        id: "chickenthigh",
+        texture: "",
+        calories: 179,
+        size: 15
+    },
+    { 
+        id: "chickenwing",
+        texture: "",
+        calories: 203,
+        size: 15
+    },
+    { 
+        id: "chickendrumstick",
+        texture: "",
+        calories: 155,
+        size: 15
+    },
+];
 
-const strawberry = document.getElementById("strawberry");
-strawberry.addEventListener("click", function() {
-    var strawberryBody = Bodies.circle(700, 200, 10, {
-        render: {
-            sprite: {
-                // texture: ""
-            }
-        },
-        value: 7  // Calories of banana
-    });
-    Composite.add(engine.world, [strawberryBody]);
-});
+function createFood(texture, calories, size) {
+    return function() {
+        var FoodBody = Bodies.circle(window.innerWidth/4, 200, size, {
+            render: {
+                sprite: {
+                    texture: texture
+                }
+            },
+            value: calories
+        });
+        Composite.add(engine.world, [FoodBody]);
+    };
+}
 
+function attachEventListeners() {
+    Foods.forEach(Food => {
+        const FoodButton = document.getElementById(Food.id);
+        FoodButton.addEventListener("click", createFood(Food.texture, Food.calories, Food.size));
+    });
+}
+
+attachEventListeners();
 
 // Update the calories count display
 const calories = document.getElementById("calories");
@@ -118,7 +240,7 @@ var walls = [
         body: Bodies.rectangle(window.innerWidth / 2, window.innerHeight, window.innerWidth, 100, {
             isStatic: true,
             render: {
-                fillStyle: "#007B16"
+                fillStyle: "#000"
             }
         }),
         name: "ground"
@@ -144,6 +266,9 @@ var bodiesToAdd = walls.map(wall => wall.body)
     .concat(stomachBottom.body)   
     .concat(stomachLeft.body)
     .concat(stomachRight.body)
+    .concat(plateBottom.body)
+    .concat(plateLeft.body)
+    .concat(plateRight.body)
     .concat(mouseConstraint);
 
 // Add all bodies to the world
