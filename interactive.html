@@ -9,8 +9,11 @@
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>
 <body>
-  <div class="content">
-    <h2 id="calories" class="text-shadows">Calories: 0</h2>
+  <div class="calories">
+    <h1 id="calories" class="text-shadows">Calories: 0</h1>
+  </div>
+  <div class="time">
+    <h1 id="time" class="text-shadows">Time: 0</h1>
   </div>
   <input type="checkbox" id="check">
     <label for="check">
@@ -37,7 +40,13 @@
     <button id="chickendrumstick">Chicken Drumstick</button>
     <button id="watermelon">Watermelon</button>
     </div>
-
+    <div class="goal">
+      <h1 id="goal" class="text-shadows">Goal: 0</h1>
+    </div>
+    <div class="message" id="finishMessage" style="display: none;">
+      <h1>You have reached your calorie goal!</h1>
+      <a id="score">Score: 0</a>
+    </div>
 
   <script src="/node_modules/matter-js/build/matter.js"></script>
   <script src="/node_modules/matter-js/build/matter.min.js"></script>

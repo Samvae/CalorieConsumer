@@ -25,6 +25,9 @@ var render = Render.create({
     }
 });
 
+// Variable to store the start time
+var startTime;
+
 // add mouse control
 let mouse = Matter.Mouse.create(render.canvas);
 let mouseConstraint = Matter.MouseConstraint.create(engine, {
@@ -33,7 +36,6 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
         render: { visible: false }
     }
 });
-
 
 // MAN
 const Man = {
@@ -349,5 +351,40 @@ Render.run(render);
 var runner = Runner.create();
 Runner.run(runner, engine);
 
-// Update the calories count display continuously
-Events.on(engine, 'beforeUpdate', updateCalories);
+
+// Update the count display continuously
+const time = document.getElementById("time");
+Events.on(engine, 'beforeUpdate', function(event) {
+    updateCalories();
+    checkFinishMessage();
+    // Timer
+    if (!startTime) {
+        startTime = event.timestamp;
+    }
+    const elapsedTime = Math.floor((event.timestamp - startTime) / 1000); // in seconds
+    time.textContent = `Time: ${elapsedTime}`;
+});
+
+
+// Create a reference to the finish message element
+const finishMessage = document.getElementById("finishMessage");
+const goal = document.getElementById("goal");
+const score = document.getElementById("score");
+const threshold = Math.floor(Math.random() * (3000 - 1500 + 1)) + 1500;
+let finishTime = null;
+// Function to check and display finish message
+function checkFinishMessage() {
+  const kcal = countCalories();
+  goal.textContent = `Goal: ${threshold}`;
+  if (kcal >= 1 && finishTime === null) {
+    finishTime = Math.floor((performance.now() - startTime) / 1000); // Save the time
+    finishMessage.style.display = "block";
+    score.textContent = `Time: ${finishTime} seconds`;
+    // Keep showing finish message even after threshold is reached
+    if (finishTime !== null) {
+        finishMessage.style.display = "block";
+    }
+  }
+}
+
+
