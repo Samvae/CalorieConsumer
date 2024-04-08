@@ -35,11 +35,6 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
 });
 
 
-// Man SVG
-const SVG = {
-    MAN: ''
-};
-
 // MAN
 const Man = {
     body: Matter.Bodies.rectangle(window.innerWidth/2 + 500, window.innerHeight/2 + 70 , 450, .001, {
@@ -72,26 +67,6 @@ const plateBottom = {
     }),
     name: "plateBottom",
   };
-
-//   const plateLeft = {
-//     body: Bodies.rectangle(window.innerWidth/4 - 230, window.innerHeight/2 - 10, 10, 20, {
-//         isStatic: true,
-//         render: {
-//             opacity: 0, // Make the rectangle invisible
-//           }
-//     }),
-//     name: "plateLeft"
-// };
-
-// const plateRight = {
-//     body: Bodies.rectangle(window.innerWidth/4 + 230, window.innerHeight/2 - 10, 10, 20, {
-//         isStatic: true,
-//         render: {
-//             opacity: 0, // Make the rectangle invisible
-//           }
-//     }),
-//     name: "plateRight"
-// };
 
 //STOMACH
 const stomachBottom = {
@@ -226,16 +201,6 @@ function createFood(texture, calories, size) {
     };
 }
 
-function path(x, y, path) {
-    let vertices = Matter.Vertices.fromPath(path);
-    return Matter.Bodies.fromVertices(x, y, vertices, {
-        isStatic: true,
-        render: {
-            lineWidth: 1
-        }
-    });
-}
-
 function attachEventListeners() {
     Foods.forEach(Food => {
         const FoodButton = document.getElementById(Food.id);
@@ -314,9 +279,6 @@ var bodiesToAdd = walls.map(wall => wall.body)
     .concat(stomachLeft.body)
     .concat(stomachRight.body)
     .concat(plateBottom.body)
-    .concat(path(window.innerWidth/2, window.innerHeight/2, SVG.MAN))
-    // .concat(plateLeft.body)
-    // .concat(plateRight.body)
     .concat(mouseConstraint);
 
 // Add all bodies to the world
