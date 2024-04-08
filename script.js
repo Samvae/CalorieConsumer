@@ -171,7 +171,7 @@ const Foods = [
     },
     { 
         id: "strawberry",
-        texture: "",
+        texture: "/images/strawberry.png",
         calories: 6,
     },
     { 
