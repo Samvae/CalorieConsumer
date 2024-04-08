@@ -376,10 +376,10 @@ let finishTime = null;
 function checkFinishMessage() {
   const kcal = countCalories();
   goal.textContent = `Goal: ${threshold}`;
-  if (kcal >= 1 && finishTime === null) {
+  if (kcal >= threshold && finishTime === null) {
     finishTime = Math.floor((performance.now() - startTime) / 1000); // Save the time
     finishMessage.style.display = "block";
-    score.textContent = `Time: ${finishTime} seconds`;
+    score.textContent = `Ate more than ${threshold} calories in ${finishTime} seconds`;
     // Keep showing finish message even after threshold is reached
     if (finishTime !== null) {
         finishMessage.style.display = "block";
