@@ -5,6 +5,10 @@ var Engine = Matter.Engine,
     Bodies = Matter.Bodies,
     Composite = Matter.Composite,
     Events = Matter.Events;
+    Body = Matter.Body;
+    Svg = Matter.Svg;
+    Vector = Matter.Vector;
+    Vertices = Matter.Vertices; 
 
 // create an engine
 var engine = Engine.create();
@@ -30,62 +34,86 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
     }
 });
 
+
+// Man SVG
+const SVG = {
+    MAN: ''
+};
+
+// MAN
+const Man = {
+    body: Matter.Bodies.rectangle(window.innerWidth/2 + 500, window.innerHeight/2 + 70 , 450, .001, {
+      isStatic: true,
+      render: {
+        sprite: {
+          texture: '/images/man.png', // Image for the plate
+          xScale: .7, // Adjust scale if needed
+          yScale: .7,
+          sensor: true,
+        }
+      }
+    }),
+    name: "Man",
+  };
+
+
 //PLATE
 const plateBottom = {
-    body: Matter.Bodies.rectangle(window.innerWidth/4, window.innerHeight/2, 450, 10, {
+    body: Matter.Bodies.rectangle(window.innerWidth/4 + 800, window.innerHeight/2 - 175, 450, 10, {
       isStatic: true,
+      angle: ( 15 * Math.PI) / 180,
       render: {
         sprite: {
           texture: '/images/plate.png', // Image for the plate
           xScale: 0.5, // Adjust scale if needed
-          yScale: 0.5
+          yScale: 0.5,
         }
       }
     }),
     name: "plateBottom",
   };
 
-  const plateLeft = {
-    body: Bodies.rectangle(window.innerWidth/4 - 230, window.innerHeight/2 - 10, 10, 20, {
-        isStatic: true,
-        render: {
-            opacity: 0, // Make the rectangle invisible
-          }
-    }),
-    name: "plateLeft"
-};
+//   const plateLeft = {
+//     body: Bodies.rectangle(window.innerWidth/4 - 230, window.innerHeight/2 - 10, 10, 20, {
+//         isStatic: true,
+//         render: {
+//             opacity: 0, // Make the rectangle invisible
+//           }
+//     }),
+//     name: "plateLeft"
+// };
 
-const plateRight = {
-    body: Bodies.rectangle(window.innerWidth/4 + 230, window.innerHeight/2 - 10, 10, 20, {
-        isStatic: true,
-        render: {
-            opacity: 0, // Make the rectangle invisible
-          }
-    }),
-    name: "plateRight"
-};
-
-
-
+// const plateRight = {
+//     body: Bodies.rectangle(window.innerWidth/4 + 230, window.innerHeight/2 - 10, 10, 20, {
+//         isStatic: true,
+//         render: {
+//             opacity: 0, // Make the rectangle invisible
+//           }
+//     }),
+//     name: "plateRight"
+// };
 
 //STOMACH
 const stomachBottom = {
-    body: Bodies.rectangle(window.innerWidth/2, window.innerHeight - 100, 400, 10, {
+    body: Bodies.rectangle(window.innerWidth/2 + 400, window.innerHeight - 90, 330, 10, {
         isStatic: true,
+        angle: ( -3 * Math.PI) / 180,
     }),
     name: "stomachBottom",
 };
 
 const stomachLeft = {
-    body: Bodies.rectangle(window.innerWidth/2 - 200, window.innerHeight - 145, 10, 100, {
+    body: Bodies.rectangle(window.innerWidth/2 + 240, window.innerHeight - 140, 10, 100, {
         isStatic: true
     }),
     name: "stomachLeft"
 };
 
 const stomachRight = {
-    body: Bodies.rectangle(window.innerWidth/2 + 200, window.innerHeight - 145, 10, 100, {
-        isStatic: true
+    body: Bodies.rectangle(window.innerWidth/2 + 575, window.innerHeight - 155, 10, 100, {
+        isStatic: true,
+        angle: (20 * Math.PI) / 180
+        
     }),
     name: "stomachRight"
 };
@@ -175,6 +203,13 @@ const Foods = [
         calories: 155,
         size: 15
     },
+    { 
+        id: "watermelon",
+        texture: "",
+        calories: 85,
+        size: 10
+    },
+    
 ];
 
 function createFood(texture, calories, size) {
@@ -191,12 +226,23 @@ function createFood(texture, calories, size) {
     };
 }
 
+function path(x, y, path) {
+    let vertices = Matter.Vertices.fromPath(path);
+    return Matter.Bodies.fromVertices(x, y, vertices, {
+        isStatic: true,
+        render: {
+            lineWidth: 1
+        }
+    });
+}
+
 function attachEventListeners() {
     Foods.forEach(Food => {
         const FoodButton = document.getElementById(Food.id);
         FoodButton.addEventListener("click", createFood(Food.texture, Food.calories, Food.size));
     });
 }
+
 
 attachEventListeners();
 
@@ -263,12 +309,14 @@ var walls = [
 
 // Combine all bodies into a single array
 var bodiesToAdd = walls.map(wall => wall.body)
+    .concat(Man.body)
     .concat(stomachBottom.body)   
     .concat(stomachLeft.body)
     .concat(stomachRight.body)
     .concat(plateBottom.body)
-    .concat(plateLeft.body)
-    .concat(plateRight.body)
+    .concat(path(window.innerWidth/2, window.innerHeight/2, SVG.MAN))
+    // .concat(plateLeft.body)
+    // .concat(plateRight.body)
     .concat(mouseConstraint);
 
 // Add all bodies to the world
