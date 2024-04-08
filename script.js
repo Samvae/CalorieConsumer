@@ -21,7 +21,7 @@ var render = Render.create({
         width: window.innerWidth,
         height: window.innerHeight,
         wireframes: false,
-        background: "#navajowhite"
+        background: "navajowhite"
     }
 });
 
@@ -166,98 +166,83 @@ const Foods = [
         id: "banana",
         texture: "/images/banana.png",
         calories: 105,
-        size: 15
     },
     { 
         id: "strawberry",
         texture: "",
         calories: 6,
-        size: 10,
     },
     { 
         id: "carrot",
         texture: "",
         calories: 25,
-        size: 10
     },
     { 
         id: "egg",
         texture: "",
         calories: 90,
-        size: 10
     },
     { 
         id: "salmon",
         texture: "",
         calories: 175,
-        size: 15
     },
     { 
         id: "apple",
         texture: "",
         calories: 80,
-        size: 10
     },
     { 
         id: "walnut",
         texture: "",
         calories: 26,
-        size: 10
     },
     { 
         id: "bacon",
         texture: "",
         calories: 43,
-        size: 12
     },
     { 
         id: "hamburger",
         texture: "",
         calories: 254,
-        size: 12
     },
     { 
         id: "pizza",
         texture: "",
         calories: 285,
-        size: 15
     },
     { 
         id: "chickenbreast",
         texture: "",
         calories: 165,
-        size: 15
     },
     { 
         id: "chickenthigh",
         texture: "",
         calories: 179,
-        size: 15
     },
     { 
         id: "chickenwing",
         texture: "",
         calories: 203,
-        size: 15
     },
     { 
         id: "chickendrumstick",
         texture: "",
         calories: 155,
-        size: 15
     },
     { 
         id: "watermelon",
         texture: "",
         calories: 85,
-        size: 10
     },
     
 ];
 
-function createFood(texture, calories, size) {
+function createFood(texture, calories) {
     return function() {
-        var FoodBody = Bodies.circle(window.innerWidth/2, 0, size, {
+        var FoodBody = Bodies.circle(window.innerWidth/2, 0, 12, {
             restitution: 0.6,
             friction: 0.1,
             gravity: 1,
