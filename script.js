@@ -37,11 +37,11 @@ let mouseConstraint = Matter.MouseConstraint.create(engine, {
 
 // MAN
 const Man = {
-    body: Matter.Bodies.rectangle(window.innerWidth/2 + 500, window.innerHeight/2 + 70 , 450, .001, {
+    body: Matter.Bodies.rectangle(window.innerWidth/2 + 500, window.innerHeight/2 + 70 , .001, .001, {
       isStatic: true,
       render: {
         sprite: {
-          texture: '/images/man.png', // Image for the plate
+          texture: 'man.png', // Image for the plate
           xScale: .7, // Adjust scale if needed
           yScale: .7,
           sensor: true,
@@ -59,7 +59,7 @@ const plateBottom = {
       angle: ( 15 * Math.PI) / 180,
       render: {
         sprite: {
-          texture: '/images/plate.png', // Image for the plate
+          texture: 'plate.png', // Image for the plate
           xScale: 0.5, // Adjust scale if needed
           yScale: 0.5,
         }
@@ -71,9 +71,9 @@ const plateBottom = {
 //STOMACH
 
 const stomachTop = {
-    body: Bodies.rectangle(window.innerWidth/2 + 400, window.innerHeight - 90, 330, 10, {
+    body: Bodies.rectangle(window.innerWidth/2 + 450, window.innerHeight/2 + 130, 330, 10, {
         isStatic: true,
-        angle: ( -3 * Math.PI) / 180,
+        angle: ( -25 * Math.PI) / 180,
     }),
     name: "stomachTop",
 };
@@ -106,7 +106,7 @@ const stomachRight = {
 const Foods = [
     { 
         id: "banana",
-        texture: "/images/banana.png",
+        texture: "banana.png",
         calories: 105,
         size: 15
     },
