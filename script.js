@@ -166,7 +166,7 @@ const stomachRight = {
 const Foods = [
     { 
         id: "banana",
-        texture: "/images/banana2.png",
+        texture: "/images/banana.png",
         calories: 105,
     },
     { 
