@@ -21,7 +21,7 @@ var render = Render.create({
         width: window.innerWidth,
         height: window.innerHeight,
         wireframes: false,
-        background: "#EEF4EE"
+        background: "#navajowhite"
     }
 });
 
@@ -41,7 +41,7 @@ const Man = {
       isStatic: true,
       render: {
         sprite: {
-          texture: 'man.png', // Image for the plate
+          texture: '/images/man.png', // Image for the plate
           xScale: .6, // Adjust scale if needed
           yScale: .6,
           sensor: true,
@@ -59,7 +59,7 @@ const plateBottom = {
       angle: ( 15 * Math.PI) / 180,
       render: {
         sprite: {
-          texture: 'plate.png', // Image for the plate
+          texture: '/images/plate.png', // Image for the plate
           xScale: 0.5, // Adjust scale if needed
           yScale: 0.5,
         }
@@ -164,7 +164,7 @@ const stomachRight = {
 const Foods = [
     { 
         id: "banana",
-        texture: "banana.png",
+        texture: "/images/banana.png",
         calories: 105,
         size: 15
     },
