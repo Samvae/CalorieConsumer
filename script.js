@@ -69,6 +69,15 @@ const plateBottom = {
   };
 
 //STOMACH
+
+const stomachTop = {
+    body: Bodies.rectangle(window.innerWidth/2 + 400, window.innerHeight - 90, 330, 10, {
+        isStatic: true,
+        angle: ( -3 * Math.PI) / 180,
+    }),
+    name: "stomachTop",
+};
+
 const stomachBottom = {
     body: Bodies.rectangle(window.innerWidth/2 + 400, window.innerHeight - 90, 330, 10, {
         isStatic: true,
@@ -78,16 +87,17 @@ const stomachBottom = {
 };
 
 const stomachLeft = {
-    body: Bodies.rectangle(window.innerWidth/2 + 240, window.innerHeight - 140, 10, 100, {
-        isStatic: true
+    body: Bodies.rectangle(window.innerWidth/2 + 260, window.innerHeight - 190, 10, 200, {
+        isStatic: true,
+        angle: ( 20 * Math.PI) / 180,
     }),
     name: "stomachLeft"
 };
 
 const stomachRight = {
-    body: Bodies.rectangle(window.innerWidth/2 + 575, window.innerHeight - 155, 10, 100, {
+    body: Bodies.rectangle(window.innerWidth/2 + 630, window.innerHeight - 300, 10, 400, {
         isStatic: true,
-        angle: (20 * Math.PI) / 180
+        angle: (15 * Math.PI) / 180
         
     }),
     name: "stomachRight"
@@ -248,7 +258,7 @@ function checkCalories(food) {
 var walls = [
     // Ground
     {
-        body: Bodies.rectangle(window.innerWidth / 2, window.innerHeight, window.innerWidth, 100, {
+        body: Bodies.rectangle(window.innerWidth / 2, window.innerHeight, window.innerWidth, 20, {
             isStatic: true,
             render: {
                 fillStyle: "#000"
@@ -277,6 +287,7 @@ var bodiesToAdd = walls.map(wall => wall.body)
     .concat(Man.body)
     .concat(stomachBottom.body)   
     .concat(stomachLeft.body)
+    .concat(stomachTop.body)
     .concat(stomachRight.body)
     .concat(plateBottom.body)
     .concat(mouseConstraint);
