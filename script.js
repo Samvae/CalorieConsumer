@@ -85,7 +85,7 @@ const Face = {
 
 //Tongue
   const Tongue = {
-    body: Bodies.rectangle(window.innerWidth/2 + 460, window.innerHeight/2 - 50, 70, 8, {
+    body: Bodies.rectangle(window.innerWidth/2 + 465, window.innerHeight/2 - 40, 80, 8, {
         isStatic: true,
         angle: ( 20 * Math.PI) / 180,
         render: {
@@ -95,10 +95,32 @@ const Face = {
     name: "Tongue",
 };
 
-const Throat = {
-    body: Bodies.rectangle(window.innerWidth/2 + 490, window.innerHeight/2, 70, 8, {
+const ThroatL = {
+    body: Bodies.rectangle(window.innerWidth/2 + 450, window.innerHeight/2 + 50, 170, 8, {
         isStatic: true,
-        angle: ( 90 * Math.PI) / 180,
+        angle: ( 125 * Math.PI) / 180,
+        render: {
+            visible: false,
+        }
+    }),
+    name: "ThroatL",
+};
+
+const ThroatR = {
+    body: Bodies.rectangle(window.innerWidth/2 + 500, window.innerHeight/2 + 40, 170, 8, {
+        isStatic: true,
+        angle: ( 125 * Math.PI) / 180,
+        render: {
+            visible: false,
+        }
+    }),
+    name: "ThroatR",
+};
+
+const Throat = {
+    body: Bodies.rectangle(window.innerWidth/2 + 540, window.innerHeight/2 - 45, 50, 8, {
+        isStatic: true,
+        angle: ( 40 * Math.PI) / 180,
         render: {
             visible: false,
         }
@@ -106,21 +128,20 @@ const Throat = {
     name: "Throat",
 };
 
-const Throat2 = {
-    body: Bodies.rectangle(window.innerWidth/2 + 540, window.innerHeight/2 - 50, 60, 8, {
+const Throat1 = {
+    body: Bodies.rectangle(window.innerWidth/2 + 480, window.innerHeight/2 + 120, 50, 8, {
         isStatic: true,
         angle: ( 40 * Math.PI) / 180,
         render: {
             visible: false,
         }
     }),
-    name: "Throat2",
+    name: "Throat1",
 };
-
 
 //STOMACH
 const stomachTop = {
-    body: Bodies.rectangle(window.innerWidth/2 + 350, window.innerHeight/2 + 110, 320, 10, {
+    body: Bodies.rectangle(window.innerWidth/2 + 340, window.innerHeight/2 + 150, 150, 10, {
         isStatic: true,
         angle: ( -25 * Math.PI) / 180,
         render: {
@@ -131,7 +152,7 @@ const stomachTop = {
 };
 
 const stomachBottom = {
-    body: Bodies.rectangle(window.innerWidth/2 + 300, window.innerHeight - 40, 300, 10, {
+    body: Bodies.rectangle(window.innerWidth/2 + 380, window.innerHeight - 60, 150, 10, {
         isStatic: true,
         angle: ( -3 * Math.PI) / 180,
         render: {
@@ -142,9 +163,9 @@ const stomachBottom = {
 };
 
 const stomachLeft = {
-    body: Bodies.rectangle(window.innerWidth/2 + 180, window.innerHeight - 100, 10, 150, {
+    body: Bodies.rectangle(window.innerWidth/2 + 290, window.innerHeight - 120, 10, 120, {
         isStatic: true,
-        angle: ( 20 * Math.PI) / 180,
+        angle: ( -12 * Math.PI) / 180,
         render: {
             visible: false,
         }
@@ -153,9 +174,9 @@ const stomachLeft = {
 };
 
 const stomachRight = {
-    body: Bodies.rectangle(window.innerWidth/2 + 510, window.innerHeight - 220, 10, 350, {
+    body: Bodies.rectangle(window.innerWidth/2 + 480, window.innerHeight - 150, 10, 170, {
         isStatic: true,
-        angle: (17 * Math.PI) / 180,
+        angle: (20 * Math.PI) / 180,
         render: {
             visible: false,
         }
@@ -318,7 +339,7 @@ function countCalories() {
 function checkCalories(food) {
     if (food.position.x > stomachLeft.body.bounds.min.x && 
         food.position.x < stomachRight.body.bounds.min.x &&
-        food.position.y > stomachLeft.body.bounds.min.y &&
+        food.position.y > stomachTop.body.bounds.min.y &&
         food.position.y < stomachBottom.body.bounds.max.y
         ) {
         return true;
@@ -356,15 +377,17 @@ var walls = [
 
 // Combine all bodies into a single array
 var bodiesToAdd = walls.map(wall => wall.body)
+    .concat(Man.body)
     .concat(stomachBottom.body)   
     .concat(stomachLeft.body)
     .concat(stomachTop.body)
     .concat(Tongue.body)
     .concat(Throat.body)
-    .concat(Throat2.body)
+    .concat(Throat1.body)
+    .concat(ThroatR.body)
+    .concat(ThroatL.body)
     .concat(stomachRight.body)
     .concat(plateBottom.body)
-    .concat(Man.body)
     .concat(Face.body)
     .concat(mouseConstraint);
 
@@ -403,7 +426,7 @@ function checkFinishMessage() {
   if (kcal >= threshold && finishTime === null) {
     finishTime = Math.floor((performance.now() - startTime) / 1000); // Save the time
     finishMessage.style.display = "block";
-    score.textContent = `Ate more than ${threshold} calories in ${finishTime} seconds`;
+    score.textContent = `You ate more than ${threshold} calories in ${finishTime} seconds`;
     // Keep showing finish message even after threshold is reached
     if (finishTime !== null) {
         finishMessage.style.display = "block";
