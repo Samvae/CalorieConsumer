@@ -176,70 +176,94 @@ const Foods = [
     },
     { 
         id: "carrot",
-        texture: "",
+        texture: "/images/carrot.png",
         calories: 25,
     },
     { 
         id: "egg",
-        texture: "",
+        texture: "/images/egg.png",
         calories: 90,
     },
     { 
         id: "salmon",
-        texture: "",
+        texture: "/images/salmon.png",
         calories: 175,
     },
     { 
         id: "apple",
-        texture: "",
-        calories: 80,
+        texture: "/images/apple.png",
+        calories: 95,
     },
     { 
         id: "walnut",
-        texture: "",
-        calories: 26,
+        texture: "/images/walnut.png",
+        calories: 185,
     },
     { 
         id: "bacon",
-        texture: "",
+        texture: "/images/bacon.png",
         calories: 43,
     },
     { 
         id: "hamburger",
-        texture: "",
-        calories: 254,
+        texture: "/images/hamburger.png",
+        calories: 350,
     },
     { 
         id: "pizza",
-        texture: "",
+        texture: "/images/pizza.png",
         calories: 285,
     },
     { 
         id: "chickenbreast",
-        texture: "",
-        calories: 165,
-    },
-    { 
-        id: "chickenthigh",
-        texture: "",
-        calories: 179,
-    },
-    { 
-        id: "chickenwing",
-        texture: "",
-        calories: 203,
-    },
-    { 
-        id: "chickendrumstick",
-        texture: "",
-        calories: 155,
+        texture: "/images/chicken.png",
+        calories: 240,
     },
     { 
         id: "watermelon",
-        texture: "",
+        texture: "/images/watermelon.png",
         calories: 85,
     },
-    
+    { 
+        id: "chip",
+        texture: "/images/chip.png",
+        calories: 12,
+    },
+    { 
+        id: "waffles",
+        texture: "/images/waffle.png",
+        calories: 218,
+    },
+    { 
+        id: "hotdog",
+        texture: "/images/hotdog.png",
+        calories: 151,
+    },
+    { 
+        id: "steak",
+        texture: "/images/steak.png",
+        calories: 679,
+    },
+    { 
+        id: "rice",
+        texture: "/images/rice.png",
+        calories: 206,
+    },
+    { 
+        id: "icecream",
+        texture: "/images/icecream.png",
+        calories: 121,
+    },
+    { 
+        id: "cake",
+        texture: "/images/cake.png",
+        calories: 352,
+    },
+    { 
+        id: "pie",
+        texture: "/images/pie.png",
+        calories: 323,
+    },
 ];
 
 function createFood(texture, calories) {
