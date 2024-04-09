@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-image: url('/images/Caloriesv1.png'); /* Replace 'your-image.jpg' with your image file path */
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-attachment: fixed;
     background-position: center center;
