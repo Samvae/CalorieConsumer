@@ -189,107 +189,127 @@ const Foods = [
         id: "banana",
         texture: "/images/banana.png",
         calories: 105,
+        size: 13,
     },
     { 
         id: "strawberry",
         texture: "/images/strawberry.png",
         calories: 6,
+        size: 10,
     },
     { 
         id: "carrot",
         texture: "/images/carrot.png",
         calories: 25,
+        size: 11,
     },
     { 
         id: "egg",
         texture: "/images/egg.png",
         calories: 90,
+        size: 12,
     },
     { 
         id: "salmon",
         texture: "/images/salmon.png",
         calories: 175,
+        size: 14,
     },
     { 
         id: "apple",
         texture: "/images/apple.png",
         calories: 95,
+        size: 12,
     },
     { 
         id: "walnut",
         texture: "/images/walnut.png",
         calories: 185,
+        size: 12,
     },
     { 
         id: "bacon",
         texture: "/images/bacon.png",
         calories: 43,
+        size: 12,
     },
     { 
         id: "hamburger",
         texture: "/images/hamburger.png",
         calories: 350,
+        size: 13,
     },
     { 
         id: "pizza",
         texture: "/images/pizza.png",
         calories: 285,
+        size: 13,
     },
     { 
         id: "chickenbreast",
         texture: "/images/chicken.png",
         calories: 240,
+        size: 13,
     },
     { 
         id: "watermelon",
         texture: "/images/watermelon.png",
         calories: 85,
+        size: 11,
     },
     { 
         id: "chip",
         texture: "/images/chip.png",
         calories: 12,
+        size: 5,
     },
     { 
         id: "waffles",
         texture: "/images/waffle.png",
         calories: 218,
+        size: 13,
     },
     { 
         id: "hotdog",
         texture: "/images/hotdog.png",
         calories: 151,
+        size: 12,
     },
     { 
         id: "steak",
         texture: "/images/steak.png",
         calories: 679,
+        size: 14,
     },
     { 
         id: "rice",
         texture: "/images/rice.png",
         calories: 206,
+        size: 10,
     },
     { 
         id: "icecream",
         texture: "/images/icecream.png",
         calories: 121,
+        size: 11,
     },
     { 
         id: "cake",
         texture: "/images/cake.png",
         calories: 352,
+        size: 13,
     },
     { 
         id: "pie",
         texture: "/images/pie.png",
         calories: 323,
+        size: 13,
     },
 ];
 
-function createFood(texture, calories) {
+function createFood(texture, calories, size) {
     return function() {
-        var FoodBody = Bodies.circle(window.innerWidth/2 + 200, 0, 12, {
+        var FoodBody = Bodies.circle(window.innerWidth/2 + 200, 0, size, {
             restitution: 0.6,
             friction: 0.1,
             gravity: 1,
