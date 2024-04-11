@@ -33,13 +33,13 @@ let mouse = Matter.Mouse.create(render.canvas);
 let mouseConstraint = Matter.MouseConstraint.create(engine, {
     mouse: mouse,
     constraint: {
-        render: { visible: false }
+        render: { visible: true }
     }
 });
 
 // MAN
 const Man = {
-    body: Matter.Bodies.rectangle(window.innerWidth/2 + 400, window.innerHeight/2 + 50, .0000001, .000001, {
+    body: Matter.Bodies.rectangle(window.innerWidth/2 + window.innerWidth/4, window.innerHeight/2 + window.innerHeight/16, .0000001, .000001, {
       isStatic: true,
       render: {
         sprite: {
@@ -56,9 +56,9 @@ const Man = {
 
 //PLATE
 const plateBottom = {
-    body: Matter.Bodies.rectangle(window.innerWidth/2 + 200, window.innerHeight/2 - 175, 480, 10, {
+    body: Matter.Bodies.rectangle(Man.body.bounds.min.x - 200, Man.body.bounds.min.y - 225, 480, 10, {
       isStatic: true,
-      angle: ( 15 * Math.PI) / 180,
+      angle: ( 20 * Math.PI) / 180,
       render: {
         sprite: {
           texture: 'plate.png', // Image for the plate
@@ -72,11 +72,11 @@ const plateBottom = {
 
 //Face
 const Face = {
-    body: Bodies.rectangle(window.innerWidth/2 + 515, window.innerHeight/2 - 90, 50, 8, {
+    body: Bodies.rectangle(Man.body.bounds.min.x + 120, Man.body.bounds.min.y - 140, 50, 8, {
         isStatic: true,
         angle: ( 90 * Math.PI) / 180,
         render: {
-            visible: false,
+            visible: true,
         }
     }),
     name: "Face",
@@ -85,55 +85,55 @@ const Face = {
 
 //Tongue
   const Tongue = {
-    body: Bodies.rectangle(window.innerWidth/2 + 465, window.innerHeight/2 - 40, 80, 8, {
+    body: Bodies.rectangle(Man.body.bounds.min.x + 60, Man.body.bounds.min.y - 90, 80, 8, {
         isStatic: true,
         angle: ( 20 * Math.PI) / 180,
         render: {
-            visible: false,
+            visible: true,
         }
     }),
     name: "Tongue",
 };
 
 const ThroatL = {
-    body: Bodies.rectangle(window.innerWidth/2 + 450, window.innerHeight/2 + 50, 170, 8, {
+    body: Bodies.rectangle(Man.body.bounds.min.x + 50, Man.body.bounds.min.y, 170, 8, {
         isStatic: true,
         angle: ( 125 * Math.PI) / 180,
         render: {
-            visible: false,
+            visible: true,
         }
     }),
     name: "ThroatL",
 };
 
 const ThroatR = {
-    body: Bodies.rectangle(window.innerWidth/2 + 500, window.innerHeight/2 + 40, 170, 8, {
+    body: Bodies.rectangle(Man.body.bounds.min.x + 100, Man.body.bounds.min.y - 10, 170, 8, {
         isStatic: true,
         angle: ( 125 * Math.PI) / 180,
         render: {
-            visible: false,
+            visible: true,
         }
     }),
     name: "ThroatR",
 };
 
 const Throat = {
-    body: Bodies.rectangle(window.innerWidth/2 + 540, window.innerHeight/2 - 45, 50, 8, {
+    body: Bodies.rectangle(Man.body.bounds.min.x + 140, Man.body.bounds.min.y - 100, 50, 8, {
         isStatic: true,
         angle: ( 40 * Math.PI) / 180,
         render: {
-            visible: false,
+            visible: true,
         }
     }),
     name: "Throat",
 };
 
 const Throat1 = {
-    body: Bodies.rectangle(window.innerWidth/2 + 480, window.innerHeight/2 + 120, 50, 8, {
+    body: Bodies.rectangle(Man.body.bounds.min.x + 90, Man.body.bounds.min.y + 70, 60, 8, {
         isStatic: true,
         angle: ( 40 * Math.PI) / 180,
         render: {
-            visible: false,
+            visible: true,
         }
     }),
     name: "Throat1",
@@ -141,44 +141,44 @@ const Throat1 = {
 
 //STOMACH
 const stomachTop = {
-    body: Bodies.rectangle(window.innerWidth/2 + 340, window.innerHeight/2 + 150, 150, 10, {
+    body: Bodies.rectangle(Man.body.bounds.min.x - 60, Man.body.bounds.min.y + 110, 150, 10, {
         isStatic: true,
-        angle: ( -25 * Math.PI) / 180,
+        angle: ( -30 * Math.PI) / 180,
         render: {
-            visible: false,
+            visible: true,
         }
     }),
     name: "stomachTop",
 };
 
 const stomachBottom = {
-    body: Bodies.rectangle(window.innerWidth/2 + 380, window.innerHeight - 60, 150, 10, {
+    body: Bodies.rectangle(Man.body.bounds.min.x - 20, Man.body.bounds.min.y + 240, 150, 10, {
         isStatic: true,
         angle: ( -3 * Math.PI) / 180,
         render: {
-            visible: false,
+            visible: true,
         }
     }),
     name: "stomachBottom",
 };
 
 const stomachLeft = {
-    body: Bodies.rectangle(window.innerWidth/2 + 290, window.innerHeight - 120, 10, 120, {
+    body: Bodies.rectangle(Man.body.bounds.min.x - 110, Man.body.bounds.min.y + 200, 10, 120, {
         isStatic: true,
-        angle: ( -12 * Math.PI) / 180,
+        angle: ( -15 * Math.PI) / 180,
         render: {
-            visible: false,
+            visible: true,
         }
     }),
     name: "stomachLeft"
 };
 
 const stomachRight = {
-    body: Bodies.rectangle(window.innerWidth/2 + 480, window.innerHeight - 150, 10, 170, {
+    body: Bodies.rectangle(Man.body.bounds.min.x + 75, Man.body.bounds.min.y + 170, 10, 170, {
         isStatic: true,
-        angle: (20 * Math.PI) / 180,
+        angle: (25 * Math.PI) / 180,
         render: {
-            visible: false,
+            visible: true,
         }
     }),
     name: "stomachRight"
@@ -309,7 +309,7 @@ const Foods = [
 
 function createFood(texture, calories, size) {
     return function() {
-        var FoodBody = Bodies.circle(window.innerWidth/2 + 200, 0, size, {
+        var FoodBody = Bodies.circle(Man.body.bounds.min.x - 200, 0, size, {
             restitution: 0.6,
             friction: 0.1,
             gravity: 1,
