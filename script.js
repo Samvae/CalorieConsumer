@@ -43,7 +43,7 @@ const Man = {
       isStatic: true,
       render: {
         sprite: {
-          texture: './images/man.png', // Image for the plate
+          texture: 'man.png', // Image for the plate
           xScale: .6, // Adjust scale if needed
           yScale: .6,
           sensor: true,
@@ -61,7 +61,7 @@ const plateBottom = {
       angle: ( 15 * Math.PI) / 180,
       render: {
         sprite: {
-          texture: './images/plate.png', // Image for the plate
+          texture: 'plate.png', // Image for the plate
           xScale: 0.5, // Adjust scale if needed
           yScale: 0.5,
         }
@@ -187,121 +187,121 @@ const stomachRight = {
 const Foods = [
     { 
         id: "banana",
-        texture: "./images/banana.png",
+        texture: "banana.png",
         calories: 105,
         size: 13,
     },
     { 
         id: "strawberry",
-        texture: "./images/strawberry.png",
+        texture: "strawberry.png",
         calories: 6,
         size: 10,
     },
     { 
         id: "carrot",
-        texture: "./images/carrot.png",
+        texture: "carrot.png",
         calories: 25,
         size: 11,
     },
     { 
         id: "egg",
-        texture: "./images/egg.png",
+        texture: "egg.png",
         calories: 90,
         size: 12,
     },
     { 
         id: "salmon",
-        texture: "./images/salmon.png",
+        texture: "salmon.png",
         calories: 175,
         size: 14,
     },
     { 
         id: "apple",
-        texture: "./images/apple.png",
+        texture: "apple.png",
         calories: 95,
         size: 12,
     },
     { 
         id: "walnut",
-        texture: "./images/walnut.png",
+        texture: "walnut.png",
         calories: 185,
         size: 12,
     },
     { 
         id: "bacon",
-        texture: "./images/bacon.png",
+        texture: "bacon.png",
         calories: 43,
         size: 12,
     },
     { 
         id: "hamburger",
-        texture: "./images/hamburger.png",
+        texture: "hamburger.png",
         calories: 350,
         size: 13,
     },
     { 
         id: "pizza",
-        texture: "./images/pizza.png",
+        texture: "pizza.png",
         calories: 285,
         size: 13,
     },
     { 
         id: "chicken",
-        texture: "./images/chicken.png",
+        texture: "chicken.png",
         calories: 240,
         size: 13,
     },
     { 
         id: "watermelon",
-        texture: "./images/watermelon.png",
+        texture: "watermelon.png",
         calories: 85,
         size: 11,
     },
     { 
         id: "chip",
-        texture: "./images/chip.png",
+        texture: "chip.png",
         calories: 12,
         size: 5,
     },
     { 
         id: "waffles",
-        texture: "./images/waffle.png",
+        texture: "waffle.png",
         calories: 218,
         size: 13,
     },
     { 
         id: "hotdog",
-        texture: "./images/hotdog.png",
+        texture: "hotdog.png",
         calories: 151,
         size: 12,
     },
     { 
         id: "steak",
-        texture: "./images/steak.png",
+        texture: "steak.png",
         calories: 679,
         size: 14,
     },
     { 
         id: "rice",
-        texture: "./images/rice.png",
+        texture: "rice.png",
         calories: 206,
         size: 10,
     },
     { 
         id: "icecream",
-        texture: "./images/icecream.png",
+        texture: "icecream.png",
         calories: 121,
         size: 11,
     },
     { 
         id: "cake",
-        texture: "./images/cake.png",
+        texture: "cake.png",
         calories: 352,
         size: 13,
     },
     { 
         id: "pie",
-        texture: "./images/pie.png",
+        texture: "pie.png",
         calories: 323,
         size: 13,
     },
