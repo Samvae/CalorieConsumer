@@ -33,7 +33,7 @@ let mouse = Matter.Mouse.create(render.canvas);
 let mouseConstraint = Matter.MouseConstraint.create(engine, {
     mouse: mouse,
     constraint: {
-        render: { visible: true }
+        render: { visible: false }
     }
 });
 
@@ -76,7 +76,7 @@ const Face = {
         isStatic: true,
         angle: ( 90 * Math.PI) / 180,
         render: {
-            visible: true,
+            visible: false,
         }
     }),
     name: "Face",
@@ -89,7 +89,7 @@ const Face = {
         isStatic: true,
         angle: ( 20 * Math.PI) / 180,
         render: {
-            visible: true,
+            visible: false,
         }
     }),
     name: "Tongue",
@@ -100,7 +100,7 @@ const ThroatL = {
         isStatic: true,
         angle: ( 125 * Math.PI) / 180,
         render: {
-            visible: true,
+            visible: false,
         }
     }),
     name: "ThroatL",
@@ -111,7 +111,7 @@ const ThroatR = {
         isStatic: true,
         angle: ( 125 * Math.PI) / 180,
         render: {
-            visible: true,
+            visible: false,
         }
     }),
     name: "ThroatR",
@@ -122,7 +122,7 @@ const Throat = {
         isStatic: true,
         angle: ( 40 * Math.PI) / 180,
         render: {
-            visible: true,
+            visible: false,
         }
     }),
     name: "Throat",
@@ -133,7 +133,7 @@ const Throat1 = {
         isStatic: true,
         angle: ( 40 * Math.PI) / 180,
         render: {
-            visible: true,
+            visible: false,
         }
     }),
     name: "Throat1",
@@ -145,7 +145,7 @@ const stomachTop = {
         isStatic: true,
         angle: ( -30 * Math.PI) / 180,
         render: {
-            visible: true,
+            visible: false,
         }
     }),
     name: "stomachTop",
@@ -156,7 +156,7 @@ const stomachBottom = {
         isStatic: true,
         angle: ( -3 * Math.PI) / 180,
         render: {
-            visible: true,
+            visible: false,
         }
     }),
     name: "stomachBottom",
@@ -167,7 +167,7 @@ const stomachLeft = {
         isStatic: true,
         angle: ( -15 * Math.PI) / 180,
         render: {
-            visible: true,
+            visible: false,
         }
     }),
     name: "stomachLeft"
@@ -178,7 +178,7 @@ const stomachRight = {
         isStatic: true,
         angle: (25 * Math.PI) / 180,
         render: {
-            visible: true,
+            visible: false,
         }
     }),
     name: "stomachRight"
